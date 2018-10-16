@@ -375,15 +375,12 @@ resource "google_compute_instance_from_template" "scan-22" {
     }
   }
 }
-
-
-resource "google_compute_instance_from_template" "jumpbox-253" {
-  name                     = "jumpbox-253"
-  source_instance_template = "${local.default_windows}"
-  description              = "This machine is used to communicate with all other machines in the network."
+resource "google_compute_instance_from_template" "struts2-23" {
+  name         = "struts2-23"
+  source_instance_template = "${local.default_ubuntu}"
   network_interface {
     subnetwork="monkeyzoo-main"
-    network_ip="10.2.2.253"
+    network_ip="10.2.2.23"
     access_config {
       // Cheaper, non-premium routing
       network_tier = "STANDARD"
@@ -391,13 +388,40 @@ resource "google_compute_instance_from_template" "jumpbox-253" {
   }
 }
 
-resource "google_compute_instance_from_template" "island-254" {
-  name                     = "island-254"
+resource "google_compute_instance_from_template" "struts2-24" {
+  name         = "struts2-24"
+  source_instance_template = "${local.default_windows}"
+  network_interface {
+    subnetwork="monkeyzoo-main"
+    network_ip="10.2.2.24"
+    access_config {
+      // Cheaper, non-premium routing
+      network_tier = "STANDARD"
+    }
+  }
+}
+
+resource "google_compute_instance_from_template" "jumpbox-252" {
+  name                     = "jumpbox-252"
+  source_instance_template = "${local.default_windows}"
+  description              = "This machine is used to communicate with all other machines in the network."
+  network_interface {
+    subnetwork="monkeyzoo-main"
+    network_ip="10.2.2.252"
+    access_config {
+      // Cheaper, non-premium routing
+      network_tier = "STANDARD"
+    }
+  }
+}
+
+resource "google_compute_instance_from_template" "island-253" {
+  name                     = "island-253"
   source_instance_template = "${local.default_windows}"
   description              = "This is the monkey island machine, that resebles the attacker in this network."
   network_interface {
     subnetwork="monkeyzoo-main"
-    network_ip="10.2.2.254"
+    network_ip="10.2.2.253"
     access_config {
       // Cheaper, non-premium routing
       network_tier = "STANDARD"
