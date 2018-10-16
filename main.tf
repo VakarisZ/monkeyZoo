@@ -7,8 +7,8 @@ provider "google" {
 
 // Local variables
 locals {
-  default_windows="${google_compute_instance_template.ubuntu16.self_link}"
-  default_ubuntu="${google_compute_instance_template.windows2016.self_link}"
+  default_ubuntu="${google_compute_instance_template.ubuntu16.self_link}"
+  default_windows="${google_compute_instance_template.windows2016.self_link}"
 }
 
 variable "region" {
