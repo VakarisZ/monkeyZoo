@@ -1,0 +1,8 @@
+# Env script
+env.bat
+
+# Network status files
+*
+# Except
+!main.tf
+!.gitignore
