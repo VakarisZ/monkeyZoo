@@ -375,3 +375,32 @@ resource "google_compute_instance_from_template" "scan-22" {
     }
   }
 }
+
+
+resource "google_compute_instance_from_template" "jumpbox-253" {
+  name                     = "jumpbox-253"
+  source_instance_template = "${local.default_windows}"
+  description              = "This machine is used to communicate with all other machines in the network."
+  network_interface {
+    subnetwork="monkeyzoo-main"
+    network_ip="10.2.2.253"
+    access_config {
+      // Cheaper, non-premium routing
+      network_tier = "STANDARD"
+    }
+  }
+}
+
+resource "google_compute_instance_from_template" "island-254" {
+  name                     = "island-254"
+  source_instance_template = "${local.default_windows}"
+  description              = "This is the monkey island machine, that resebles the attacker in this network."
+  network_interface {
+    subnetwork="monkeyzoo-main"
+    network_ip="10.2.2.254"
+    access_config {
+      // Cheaper, non-premium routing
+      network_tier = "STANDARD"
+    }
+  }
+}
