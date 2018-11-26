@@ -6,4 +6,5 @@ env.bat
 # Except
 !main.tf
 !.gitignore
+!variables.tf
 !README.MD

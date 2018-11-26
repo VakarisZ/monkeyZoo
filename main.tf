@@ -16,7 +16,7 @@ variable "region" {
 }
 
 variable "zone" {
-  default="europe-west3-a"
+  default="europe-west3-b"
 }
 
 resource "google_compute_network" "monkeyzoo" {
@@ -83,7 +83,7 @@ resource "google_compute_instance_template" "windows2016" {
   can_ip_forward       = false
 
   disk {
-    source_image = "windows-cloud/windows-2016-core"
+    source_image = "windows-cloud/windows-2016"
     auto_delete = true
     boot = true
   }
@@ -340,6 +340,11 @@ resource "google_compute_instance_from_template" "weblogic-19" {
 resource "google_compute_instance_from_template" "smb-20" {
   name         = "smb-20"
   source_instance_template = "${local.default_windows}"
+  boot_disk{
+    initialize_params {
+      image = "${data.google_compute_image.smb-20.self_link}"
+    }
+  }
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.20"
@@ -399,26 +404,19 @@ resource "google_compute_instance_from_template" "struts2-24" {
       network_tier = "STANDARD"
     }
   }
-}
-
-resource "google_compute_instance_from_template" "jumpbox-252" {
-  name                     = "jumpbox-252"
-  source_instance_template = "${local.default_windows}"
-  description              = "This machine is used to communicate with all other machines in the network."
-  network_interface {
-    subnetwork="monkeyzoo-main"
-    network_ip="10.2.2.252"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
-  }
+  
+  //boot_disk {
+  //  initialize_params {
+  //    image = "struts-24"
+  //  }
+  //}
 }
 
 resource "google_compute_instance_from_template" "island-253" {
   name                     = "island-253"
   source_instance_template = "${local.default_windows}"
   description              = "This is the monkey island machine, that resebles the attacker in this network."
+  machine_type         = "n1-standard-2"
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.253"
