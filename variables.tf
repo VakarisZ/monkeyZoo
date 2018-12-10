@@ -1,12 +1,12 @@
 //Custom cloud images
 data "google_compute_image" "hadoop-2" {
-  name = "hadoop-2"
+  name = "hadoop-2-v4"
 }
 data "google_compute_image" "hadoop-3" {
   name = "hadoop-3"
 }
 data "google_compute_image" "elastic-4" {
-  name = "elastic-4"
+  name = "elastic-4-v3"
 }
 data "google_compute_image" "elastic-5" {
   name = "elastic-5"
@@ -18,22 +18,22 @@ data "google_compute_image" "sambacry-6" {
 }
 */
 data "google_compute_image" "shellshock-8" {
-  name = "shellshock-8"
+  name = "shellshock-8-v2"
 }
 data "google_compute_image" "tunneling-9" {
-  name = "tunneling-9"
+  name = "tunneling-9-v2"
 }
 data "google_compute_image" "tunneling-10" {
-  name = "tunneling-10"
+  name = "tunneling-10-v2"
 }
 data "google_compute_image" "sshkeys-11" {
-  name = "sshkeys-11"
+  name = "sshkeys-11-v2"
 }
 data "google_compute_image" "sshkeys-12" {
-  name = "sshkeys-12"
+  name = "sshkeys-12-v2"
 }
 data "google_compute_image" "mimikatz-14" {
-  name = "mimikatz-14"
+  name = "mimikatz-14-v2"
 }
 data "google_compute_image" "mimikatz-15" {
   name = "mimikatz-15"
@@ -45,7 +45,7 @@ data "google_compute_image" "weblogic-18" {
   name = "weblogic-18"
 }
 data "google_compute_image" "weblogic-19" {
-  name = "weblogic-19"
+  name = "weblogic-19-v2"
 }
 data "google_compute_image" "smb-20" {
   name = "smb-20"
@@ -60,5 +60,17 @@ data "google_compute_image" "struts2-23" {
   name = "struts2-23"
 }
 data "google_compute_image" "struts2-24" {
+  name = "struts2-24"
+}
+data "google_compute_image" "struts2-23" {
+  name = "struts2-23"
+}
+data "google_compute_image" "struts2-24" {
+  name = "struts2-24"
+}
+data "google_compute_image" "island-linux-250" {
+  name = "struts2-23"
+}
+data "google_compute_image" "island-windows-251" {
   name = "struts2-24"
 }
