@@ -8,3 +8,4 @@ env.bat
 !.gitignore
 !variables.tf
 !README.MD
+!config.tf

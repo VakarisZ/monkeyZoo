@@ -1,9 +1,3 @@
-provider "google" {
-  project = "guardicore-22050661"
-  region  = "europe-west3"
-  zone    = "europe-west3-a"
-  credentials = "${file("guardicore-22050661-9d4e6c6672fc.json")}"
-}
 
 // Local variables
 locals {
@@ -102,13 +96,10 @@ resource "google_compute_instance_template" "ubuntu16" {
   tags = ["test-machine", "ubuntu16", "linux"]
 
   machine_type         = "n1-standard-1"
-  region               = "${var.region}"
   can_ip_forward       = false
 
   disk {
     source_image = "ubuntu-os-cloud/ubuntu-1604-lts"
-    auto_delete = true
-    boot = true
   }
   network_interface {
     subnetwork="monkeyzoo-main"
@@ -118,7 +109,7 @@ resource "google_compute_instance_template" "ubuntu16" {
     }
   }
   service_account {
-    email ="terraform-google@guardicore-22050661.iam.gserviceaccount.com"
+    email ="${local.service_account_email}"
     scopes=["cloud-platform"]
   }
 }
@@ -130,13 +121,10 @@ resource "google_compute_instance_template" "windows2016" {
   tags = ["test-machine", "windows2016core", "windows"]
 
   machine_type         = "n1-standard-1"
-  region               = "${var.region}"
   can_ip_forward       = false
 
   disk {
     source_image = "windows-cloud/windows-2016"
-    auto_delete = true
-    boot = true
   }
   network_interface {
     subnetwork="monkeyzoo-main"
@@ -146,7 +134,7 @@ resource "google_compute_instance_template" "windows2016" {
     }
   }
   service_account {
-    email="terraform-google@guardicore-22050661.iam.gserviceaccount.com"
+    email="${local.service_account_email}"
     scopes=["cloud-platform"]
   }
 }
@@ -219,6 +207,7 @@ resource "google_compute_instance_from_template" "elastic-5" {
     }
   }
 }
+/*
 resource "google_compute_instance_from_template" "sambacry-6" {
   name         = "sambacry-6"
   source_instance_template = "${local.default_ubuntu}"
@@ -236,7 +225,7 @@ resource "google_compute_instance_from_template" "sambacry-6" {
     }
   }
 }
-
+*/
 /* WE NEED COSTOM 32-BIT UBUNTU FOR THIS MACHINE
 resource "google_compute_instance_from_template" "sambacry-7" {
   name         = "sambacry-7"
@@ -347,6 +336,7 @@ resource "google_compute_instance_from_template" "sshkeys-12" {
     }
   }
 }
+/*
 resource "google_compute_instance_from_template" "rdpgrinder-13" {
   name         = "rdpgrinder-13"
   source_instance_template = "${local.default_windows}"
@@ -364,6 +354,7 @@ resource "google_compute_instance_from_template" "rdpgrinder-13" {
     }
   }
 }
+*/
 
 resource "google_compute_instance_from_template" "mimikatz-14" {
   name         = "mimikatz-14"
@@ -418,7 +409,7 @@ resource "google_compute_instance_from_template" "mssql-16" {
     }
   }
 }
-
+/*
 resource "google_compute_instance_from_template" "upgrader-17" {
   name         = "upgrader-17"
   source_instance_template = "${local.default_windows}"
@@ -436,6 +427,7 @@ resource "google_compute_instance_from_template" "upgrader-17" {
     }
   }
 }
+*/
 resource "google_compute_instance_from_template" "weblogic-18" {
   name         = "weblogic-18"
   source_instance_template = "${local.default_ubuntu}"
@@ -497,6 +489,7 @@ resource "google_compute_instance_from_template" "scan-21" {
     initialize_params {
       image = "${data.google_compute_image.scan-21.self_link}"
     }
+    auto_delete = true
   }
   network_interface {
     subnetwork="monkeyzoo-main"
