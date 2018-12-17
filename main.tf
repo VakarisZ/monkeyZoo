@@ -32,7 +32,7 @@ resource "google_compute_firewall" "monkeyzoo-in" {
   }
 
   direction = "INGRESS"
-
+  priority = "65534"
   source_ranges = ["10.2.2.0/24"]
 }
 
@@ -45,7 +45,7 @@ resource "google_compute_firewall" "monkeyzoo-out" {
   }
 
   direction = "EGRESS"
-
+  priority = "65534"
   destination_ranges = ["10.2.2.0/24"]
 }
 
@@ -128,10 +128,6 @@ resource "google_compute_instance_template" "windows2016" {
   }
   network_interface {
     subnetwork="monkeyzoo-main"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
   service_account {
     email="${local.service_account_email}"
@@ -150,10 +146,6 @@ resource "google_compute_instance_from_template" "hadoop-2" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.2"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 resource "google_compute_instance_from_template" "hadoop-3" {
@@ -167,10 +159,6 @@ resource "google_compute_instance_from_template" "hadoop-3" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.3"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 resource "google_compute_instance_from_template" "elastic-4" {
@@ -184,10 +172,6 @@ resource "google_compute_instance_from_template" "elastic-4" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.4"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 resource "google_compute_instance_from_template" "elastic-5" {
@@ -201,10 +185,6 @@ resource "google_compute_instance_from_template" "elastic-5" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.5"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 /*
@@ -219,10 +199,6 @@ resource "google_compute_instance_from_template" "sambacry-6" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.6"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 */
@@ -235,6 +211,10 @@ resource "google_compute_instance_from_template" "sambacry-7" {
       // Add custom image to cloud
       image = "ubuntu32"
     }
+  }
+  network_interface {
+    subnetwork="monkeyzoo-main"
+    network_ip="10.2.2.7"
   }
 }
 */
@@ -249,10 +229,6 @@ resource "google_compute_instance_from_template" "shellshock-8" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.8"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 resource "google_compute_instance_from_template" "tunneling-9" {
@@ -266,19 +242,11 @@ resource "google_compute_instance_from_template" "tunneling-9" {
   network_interface{
     subnetwork="tunneling-main"
     network_ip="10.2.1.9"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
     
   }
   network_interface{
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.9"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -293,10 +261,6 @@ resource "google_compute_instance_from_template" "tunneling-10" {
   network_interface{
     subnetwork="tunneling-main"
     network_ip="10.2.1.10"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -312,10 +276,6 @@ resource "google_compute_instance_from_template" "sshkeys-11" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.11"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -330,10 +290,6 @@ resource "google_compute_instance_from_template" "sshkeys-12" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.12"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 /*
@@ -348,10 +304,6 @@ resource "google_compute_instance_from_template" "rdpgrinder-13" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.13"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 */
@@ -367,10 +319,6 @@ resource "google_compute_instance_from_template" "mimikatz-14" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.14"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -385,10 +333,6 @@ resource "google_compute_instance_from_template" "mimikatz-15" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.15"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -403,10 +347,6 @@ resource "google_compute_instance_from_template" "mssql-16" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.16"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 /*
@@ -439,10 +379,6 @@ resource "google_compute_instance_from_template" "weblogic-18" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.18"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -457,10 +393,6 @@ resource "google_compute_instance_from_template" "weblogic-19" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.19"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -475,10 +407,6 @@ resource "google_compute_instance_from_template" "smb-20" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.20"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -494,10 +422,6 @@ resource "google_compute_instance_from_template" "scan-21" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.21"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -512,10 +436,6 @@ resource "google_compute_instance_from_template" "scan-22" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.22"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 resource "google_compute_instance_from_template" "struts2-23" {
@@ -529,10 +449,6 @@ resource "google_compute_instance_from_template" "struts2-23" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.23"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
@@ -547,30 +463,12 @@ resource "google_compute_instance_from_template" "struts2-24" {
   network_interface {
     subnetwork="monkeyzoo-main"
     network_ip="10.2.2.24"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
-  }
-}
-
-resource "google_compute_instance_from_template" "island-253" {
-  name                     = "island-253"
-  source_instance_template = "${local.default_windows}"
-  description              = "This is the monkey island machine, that resebles the attacker in this network."
-  machine_type         = "n1-standard-2"
-  network_interface {
-    subnetwork="monkeyzoo-main"
-    network_ip="10.2.2.253"
-    access_config {
-      // Cheaper, non-premium routing
-      network_tier = "STANDARD"
-    }
   }
 }
 
 resource "google_compute_instance_from_template" "island-linux-250" {
   name         = "island-linux-250"
+  machine_type         = "n1-standard-2"
   source_instance_template = "${local.default_ubuntu}"
   boot_disk{
     initialize_params {
@@ -589,6 +487,7 @@ resource "google_compute_instance_from_template" "island-linux-250" {
 
 resource "google_compute_instance_from_template" "island-windows-251" {
   name         = "island-windows-251"
+  machine_type         = "n1-standard-2"
   source_instance_template = "${local.default_windows}"
   boot_disk{
     initialize_params {

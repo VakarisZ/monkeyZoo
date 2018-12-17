@@ -6,4 +6,5 @@ provider "google" {
 }
 locals {
   service_account_email="tester-monkeyZoo-user@testproject-000000.iam.gserviceaccount.com"
+  monkeyzoo_project="guardicore-22050661"
 }
